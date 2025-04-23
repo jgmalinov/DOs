@@ -1,0 +1,30 @@
+﻿@model IndexViewModel;
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <table>
+        <thead>
+            <th>DO</th>
+            <th>DO What</th>
+            <th>DO By</th>
+            <th>Done</th>
+        </thead>
+        <tbody>
+            @foreach(DO dO in Model._DOs)
+            {
+                <tr>
+                    <td>@dO.Title</td>
+                    <td>@dO.Description</td>
+                    <td>@dO.DueDate</td>
+                    <td>@dO.Done</td>
+                    <td><a asp-action="DO" asp-route-id="@dO.Id">@(dO.Done ? "UnDO" : "DO")</a></td>
+                    <td><a asp-action="Update">Update</a></td>
+                    <td><a asp-action="Delete">Delete</a></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    </li>
+</div>
