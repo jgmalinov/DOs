@@ -65,6 +65,18 @@ public class HomeController : Controller
         return RedirectToAction("Index");
     }
 
+    [HttpGet]
+    public IActionResult Create()
+    {
+        return View();
+    }
+
+    [HttpPost]
+    public IActionResult Create(DO Do)
+    {
+        return Ok();
+    }
+
     public IActionResult Privacy()
     {
         return View();
