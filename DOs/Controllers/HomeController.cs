@@ -1,6 +1,7 @@
 using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using DOs.Models;
+using System.Xml.Schema;
 
 namespace DOs.Controllers;
 
@@ -46,11 +47,11 @@ public class HomeController : Controller
         return View(dO);
     }
 
-    [HttpPut]
+    [HttpPost]
     public IActionResult Update(DO dO)
     {
         DO DbDo = _context.DOs.Find(dO.Id);
-        if (dO is null)
+        if (DbDo is null)
         {
             return NotFound();
         }
@@ -74,7 +75,28 @@ public class HomeController : Controller
     [HttpPost]
     public IActionResult Create(DO Do)
     {
-        return Ok();
+        if (!ModelState.IsValid)
+        {
+            return View(Do);
+        } else
+        {
+            _context.Add(Do);
+            _context.SaveChanges();
+            return RedirectToAction("Index");
+        }
+    }
+
+    [HttpGet]
+    public IActionResult Delete(int Id)
+    {
+        DO? Do = _context.DOs.Find(Id);
+        if (Do is null)
+        {
+            return NotFound();
+        }
+        _context.DOs.Remove(Do);
+        _context.SaveChanges();
+        return RedirectToAction("Index");
     }
 
     public IActionResult Privacy()

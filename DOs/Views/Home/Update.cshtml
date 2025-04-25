@@ -4,7 +4,7 @@
 }
 
 <div class="text-center">
-   <form asp-action="Update" method="put">
+   <form asp-action="Update" method="post">
         <div class="form-group">
             <label asp-for="@Model.Title">DO</label>
             <input asp-for="@Model.Title" value="@Model.Title"/>
@@ -22,7 +22,7 @@
         </div>
         <div class="form-group">
             <label asp-for="@Model.Done">DONE?</label>
-            <input asp-for="@Model.Done" value="@Model.Done"/>
+            <input asp-for="@Model.Done" type="checkbox" checked="@Model.Done" />
             <span asp-validation-for="@Model.Done" class="text-danger"></span>
         </div>
         <button type="submit">Do Update</Doc></button>
